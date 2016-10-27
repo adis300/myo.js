@@ -18,8 +18,9 @@ Myo.on('emg', function(data){
 	rawData = data;
 })
 
-
-var range = 150;
+//Disi's Change'
+//var range = 150;
+var range = 128;
 var resolution = 50;
 var emgGraphs;
 
@@ -38,14 +39,14 @@ $(document).ready(function(){
 
 	emgGraphs = graphData.map(function(podData, podIndex){
 		return $('#pod' + podIndex).plot(formatFlotData(podData), {
-			colors: ['#8aceb5'],
+			colors: ['#2196F3'], //#8aceb5
 			xaxis: {
 				show: false,
 				min : 0,
 				max : resolution
 			},
 			yaxis : {
-				min : -range,
+				min : 0,//DISI's change -range
 				max : range,
 			},
 			grid : {
@@ -59,9 +60,7 @@ $(document).ready(function(){
 });
 
 var formatFlotData = function(data){
-		return [data.map(function(val, index){
-				return [index, val]
-			})]
+	return [data.map(function(val, index){ return [index, val]})];
 }
 
 
@@ -73,18 +72,6 @@ var updateGraph = function(emgData){
 
 		emgGraphs[index].setData(formatFlotData(graphData[index]));
 		emgGraphs[index].draw();
-
-
 	})
 
 }
-
-
-
-
-/*
-
-
-
-
-*/

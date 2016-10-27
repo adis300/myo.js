@@ -6,6 +6,8 @@
 		if(!("WebSocket" in window)) console.error('Myo.js : Sockets not supported :(');
 		Socket = WebSocket;
 	}
+	// DISI's change
+	var maxValue = 0, saturationCount = 0, grossDataCount = 0;
 
 	Myo = {
 		defaults : {
@@ -215,6 +217,25 @@
 			myo.lastIMU = imu_data;
 		},
 		'emg' : function(myo, data){
+			// DISI's: Change
+			var val = 0;
+			// Snippets to get absolute value
+			for(var i = 0; i<data.emg.length; i++){
+				val = Math.abs(data.emg[i]);
+				if(maxValue < val) maxValue = val;
+				if(val == 128) ++saturationCount;
+				data.emg[i] = val;
+			}
+			/*
+			data.emg.forEach(function(val){
+				val = Math.abs(val);
+				if(maxValue < val) maxValue = val;
+				if(val == 128) ++saturationCount;
+			});*/
+			grossDataCount += 8;
+			console.log("Max value:" + maxValue);
+			console.log("Saturation count/GrossDataCount:" + saturationCount + "/" + grossDataCount);
+				// console.log(data.emg);
 			myo.trigger(data.type, data.emg, data.timestamp);
 		},
 

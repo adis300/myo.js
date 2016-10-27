@@ -22,7 +22,7 @@ $(document).ready(function(){
 	graph = $('.orientationGraph').plot(formatFlotData(), {
 		colors: [ '#04fbec', '#ebf1be', '#c14b2a', '#8aceb5'],
 		xaxis: {
-			show: false,
+			show: true,
 			min : 0,
 			max : resolution
 		},

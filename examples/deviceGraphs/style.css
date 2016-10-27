@@ -6,7 +6,7 @@ html, body{
 }
 
 body{
-	background  : #10161d url('img/dot_grid.png');
+	/*background  : #10161d url('img/dot_grid.png');*/
 	font-family : 'blender_prothin';
 	font-size   : 12px;
 	color       : #58bccc;
